@@ -5,12 +5,29 @@
   --text-color: #ffffff;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
 .app {
   min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: var(--primary-bg);
   color: var(--text-color);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .main-content {
@@ -18,4 +35,5 @@
   padding: 20px;
   padding-bottom: 70px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }

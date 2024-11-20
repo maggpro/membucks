@@ -10,30 +10,28 @@ function App() {
   useEffect(() => {
     // Инициализация Telegram WebApp
     const tg = window.Telegram.WebApp;
-    tg.ready();
 
-    // Расширяем на всю высоту
+    // Настраиваем параметры отображения
+    tg.setHeaderColor('#1a1a1a'); // Устанавливаем цвет хедера
+    tg.setBackgroundColor('#1a1a1a'); // Устанавливаем цвет фона
+
+    // Включаем расширенный вид
     tg.expand();
 
-    // Запрашиваем полноэкранный режим
-    tg.requestFullscreen();
-
-    // Обработчик изменения полноэкранного режима
-    tg.onEvent('fullscreenChanged', () => {
-      if (tg.isFullscreen) {
-        console.log('Приложение в полноэкранном режиме');
-      }
-    });
-
-    // Обработчик ошибки перехода в полноэкранный режим
-    tg.onEvent('fullscreenFailed', () => {
-      console.log('Не удалось перейти в полноэкранный режим');
-    });
-
+    // Настраиваем параметры приложения
     tg.MainButton.setParams({
       text: 'НАЧАТЬ МАЙНИНГ',
       color: '#00ff9d',
+      text_color: '#1a1a1a',
+      is_visible: true,
+      is_active: true
     });
+
+    // Настраиваем viewport
+    tg.viewportStableHeight = true;
+
+    // Сообщаем Telegram, что приложение готово
+    tg.ready();
   }, []);
 
   return (
