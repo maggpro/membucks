@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/membucks/static/css/main.c85267ef.css",
-    "main.js": "/membucks/static/js/main.1c40c603.js",
+    "main.css": "/membucks/static/css/main.80d1fb9c.css",
+    "main.js": "/membucks/static/js/main.f5273f15.js",
     "index.html": "/membucks/index.html",
-    "main.c85267ef.css.map": "/membucks/static/css/main.c85267ef.css.map",
-    "main.1c40c603.js.map": "/membucks/static/js/main.1c40c603.js.map"
+    "main.80d1fb9c.css.map": "/membucks/static/css/main.80d1fb9c.css.map",
+    "main.f5273f15.js.map": "/membucks/static/js/main.f5273f15.js.map"
   },
   "entrypoints": [
-    "static/css/main.c85267ef.css",
-    "static/js/main.1c40c603.js"
+    "static/css/main.80d1fb9c.css",
+    "static/js/main.f5273f15.js"
   ]
 }
