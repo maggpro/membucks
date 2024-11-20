@@ -1,0 +1,53 @@
+.mining-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 30px;
+}
+
+.mining-stats {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.balance, .mining-power {
+  background-color: var(--secondary-bg);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.balance h2, .mining-power h2 {
+  font-size: 14px;
+  margin: 0 0 10px 0;
+  color: var(--text-color);
+}
+
+.value {
+  font-size: 24px;
+  margin: 0;
+  color: var(--accent-color);
+}
+
+.mining-status {
+  width: 100%;
+  text-align: center;
+}
+
+.status-indicator {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--secondary-bg);
+  border: 2px solid #ff4444;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #ff4444;
+}
+
+.status-indicator.active {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}

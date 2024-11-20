@@ -11,12 +11,23 @@ function App() {
     // Инициализация Telegram WebApp
     const tg = window.Telegram.WebApp;
     tg.ready();
+
     // Расширяем на всю высоту
     tg.expand();
 
-    // Добавляем обработку основных событий Telegram WebApp
-    tg.onEvent('viewportChanged', () => {
-      // Обработка изменения размера окна
+    // Запрашиваем полноэкранный режим
+    tg.requestFullscreen();
+
+    // Обработчик изменения полноэкранного режима
+    tg.onEvent('fullscreenChanged', () => {
+      if (tg.isFullscreen) {
+        console.log('Приложение в полноэкранном режиме');
+      }
+    });
+
+    // Обработчик ошибки перехода в полноэкранный режим
+    tg.onEvent('fullscreenFailed', () => {
+      console.log('Не удалось перейти в полноэкранный режим');
     });
 
     tg.MainButton.setParams({
