@@ -1,0 +1,39 @@
+.navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--secondary-bg);
+  padding: 15px 0;
+  border-top: 2px solid var(--accent-color);
+  z-index: 1000;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 8px 16px;
+  transition: color 0.3s;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0;
+}
+
+.nav-link:hover {
+  color: var(--accent-color);
+}
+
+.nav-link.active {
+  color: var(--accent-color);
+  border-top: 2px solid var(--accent-color);
+  margin-top: -2px;
+}

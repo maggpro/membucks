@@ -1,0 +1,21 @@
+:root {
+  --primary-bg: #1a1a1a;
+  --secondary-bg: #2d2d2d;
+  --accent-color: #00ff9d;
+  --text-color: #ffffff;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-bg);
+  color: var(--text-color);
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  padding-bottom: 70px;
+  overflow-y: auto;
+}
