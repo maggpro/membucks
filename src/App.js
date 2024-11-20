@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Mining from './pages/Mining';
 import Tasks from './pages/Tasks';
@@ -13,10 +13,20 @@ function App() {
     tg.ready();
     // Расширяем на всю высоту
     tg.expand();
+
+    // Добавляем обработку основных событий Telegram WebApp
+    tg.onEvent('viewportChanged', () => {
+      // Обработка изменения размера окна
+    });
+
+    tg.MainButton.setParams({
+      text: 'НАЧАТЬ МАЙНИНГ',
+      color: '#00ff9d',
+    });
   }, []);
 
   return (
-    <BrowserRouter basename="/membucks">
+    <HashRouter>
       <div className="app">
         <Navigation />
         <main className="main-content">
@@ -27,7 +37,7 @@ function App() {
           </Routes>
         </main>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
