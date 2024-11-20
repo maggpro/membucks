@@ -26,14 +26,15 @@
   transition: color 0.3s;
   font-family: 'Press Start 2P', cursive;
   letter-spacing: 0;
+  opacity: 0.5;
 }
 
 .nav-link:hover {
   color: var(--accent-color);
+  opacity: 0.8;
 }
 
 .nav-link.active {
   color: var(--accent-color);
-  border-top: 2px solid var(--accent-color);
-  margin-top: -2px;
+  opacity: 1;
 }
