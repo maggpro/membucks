@@ -6,15 +6,10 @@ function Navigation() {
   return (
     <nav className="navigation">
       <div className="nav-links">
-        <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-          Майнинг
-        </NavLink>
-        <NavLink to="/tasks" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-          Задания
-        </NavLink>
-        <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-          О MemBucks
-        </NavLink>
+        <NavLink to="/mining" className="nav-link">Майнинг</NavLink>
+        <NavLink to="/rating" className="nav-link">Рейтинг</NavLink>
+        <NavLink to="/tasks" className="nav-link">Задания</NavLink>
+        <NavLink to="/about" className="nav-link">О MemBucks</NavLink>
       </div>
     </nav>
   );
