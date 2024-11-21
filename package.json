@@ -36,14 +36,11 @@
       "last 1 safari version"
     ]
   },
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@babel/preset-env": "^7.26.0",
     "babel-loader": "^9.2.1",
+    "eslint": "^8.0.0",
+    "eslint-config-react-app": "^7.0.0",
     "gh-pages": "^6.2.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",

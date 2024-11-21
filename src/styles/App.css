@@ -3,6 +3,7 @@
   --secondary-bg: #2d2d2d;
   --accent-color: #00ff9d;
   --text-color: #ffffff;
+  --block-bg: rgba(0, 0, 0, 0.85);
 }
 
 html, body {
@@ -32,8 +33,97 @@ html, body {
 
 .main-content {
   flex: 1;
-  padding: 20px;
-  padding-bottom: 70px;
+  padding: 4px 6px;
+  padding-bottom: 60px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.mining-page,
+.rating-page,
+.about-page,
+.tasks-page {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.profile-block,
+.coin-info-block,
+.mining-info-block,
+.mining-history-block,
+.rating-block,
+.about-block,
+.tasks-block,
+.history-item,
+.rating-item,
+.about-section,
+.spec-item,
+.energy-spec-item {
+  background-color: var(--block-bg);
+  border-radius: 6px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.info-box,
+.feature-list,
+.spec-item,
+.energy-spec-item,
+.history-item,
+.rating-item,
+.bonus-box,
+.info-note,
+.equipment-control,
+.mining-power-info .info-row {
+  padding: 8px;
+}
+
+.highlight,
+.accent {
+  border: 1px solid rgba(0, 255, 157, 0.2);
+}
+
+.warning {
+  border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+h2 {
+  font-size: 10px;
+  margin: 0 0 8px 0;
+  color: var(--accent-color);
+}
+
+.value,
+.balance-value,
+.energy-value,
+.total-supply,
+.miners-count,
+.detail-value,
+.mined-amount {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  color: var(--accent-color);
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    max-width: 320px;
+    margin: 0 auto;
+  }
 }

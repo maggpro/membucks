@@ -1,0 +1,118 @@
+.rating-page {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+}
+
+.rating-block {
+  background-color: var(--block-bg);
+  border-radius: 6px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rating-block h2 {
+  font-size: 8px;
+  margin: 0 0 8px 0;
+  color: var(--accent-color);
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.rating-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rating-item {
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Стили для топ-3 */
+.rating-item.rank-1 {
+  border-color: rgba(255, 215, 0, 0.3);
+}
+
+.rating-item.rank-2 {
+  border-color: rgba(192, 192, 192, 0.3);
+}
+
+.rating-item.rank-3 {
+  border-color: rgba(205, 127, 50, 0.3);
+}
+
+.rating-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.rank-and-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rank,
+.username,
+.mined-amount,
+.detail-label,
+.detail-value {
+  font-size: 8px;
+}
+
+.rank {
+  color: var(--accent-color);
+  opacity: 0.8;
+}
+
+.username {
+  color: var(--text-color);
+}
+
+.mined-amount {
+  color: var(--accent-color);
+}
+
+.rating-item-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.detail-item {
+  display: flex;
+  gap: 4px;
+}
+
+.detail-label {
+  opacity: 0.6;
+}
+
+.detail-value {
+  color: var(--accent-color);
+}
+
+.current-player-block {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.current-player {
+  border: 1px solid var(--accent-color);
+}
+
+.divider {
+  text-align: center;
+  margin: 4px 0;
+  font-size: 8px;
+  opacity: 0.7;
+}
