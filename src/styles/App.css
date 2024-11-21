@@ -4,6 +4,11 @@
   --accent-color: #00ff9d;
   --text-color: #ffffff;
   --block-bg: rgba(0, 0, 0, 0.85);
+  --tg-theme-button-color: var(--accent-color);
+  --tg-theme-button-text-color: var(--primary-bg);
+  --tg-viewport-height: 100vh;
+  --tg-viewport-stable-height: 100vh;
+  --tg-header-height: 48px;
 }
 
 html, body {
@@ -34,11 +39,22 @@ html, body {
 .main-content {
   flex: 1;
   padding: 4px 6px;
+  padding-top: calc(var(--tg-header-height) + 4px);
   padding-bottom: 60px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
   width: 100%;
+  height: calc(var(--tg-viewport-stable-height) - var(--tg-header-height));
+}
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  .main-content {
+    padding-top: calc(env(safe-area-inset-top) + var(--tg-header-height) + 4px);
+    padding-left: calc(env(safe-area-inset-left) + 6px);
+    padding-right: calc(env(safe-area-inset-right) + 6px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 60px);
+  }
 }
 
 .mining-page,
