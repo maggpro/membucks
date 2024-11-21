@@ -206,6 +206,11 @@
   border-radius: 4px;
 }
 
+.history-item.failed {
+  background-color: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.2);
+}
+
 .history-user {
   font-size: 8px;
   color: var(--accent-color);
@@ -225,6 +230,10 @@
 
 .history-reward {
   color: var(--accent-color);
+}
+
+.history-reward.failed {
+  color: #ff4444;
 }
 
 /* Профиль блок */

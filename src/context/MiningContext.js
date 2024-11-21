@@ -29,6 +29,9 @@ export function MiningProvider({ children }) {
   const [isPurchaseInProgress, setIsPurchaseInProgress] = useState(false);
   const [isUpgradeInProgress, setIsUpgradeInProgress] = useState(false);
 
+  // Добавляем состояние для последней попытки
+  const [lastMiningAttempt, setLastMiningAttempt] = useState({ success: true, reward: 0 });
+
   // Эффект для отслеживания онлайн майнеров
   useEffect(() => {
     if (isActive) {
@@ -50,17 +53,39 @@ export function MiningProvider({ children }) {
         const cycleTime = 3000 + Math.random() * 8000;
 
         if (Date.now() - lastCycleTime >= cycleTime) {
-          const reward = calculateCycleReward() * miningPower;
-          setBalance(prev => prev + reward);
+          // Добавляем шанс неудачи (1 из 10)
+          const isSuccessful = Math.random() > 0.1;
+          const reward = isSuccessful ? calculateCycleReward() * miningPower : 0;
+
+          if (isSuccessful) {
+            setBalance(prev => prev + reward);
+            setTotalMined(prev => prev + reward);
+
+            // Вибрация при успешной добыче
+            if (window.Telegram?.WebApp?.HapticFeedback) {
+              window.Telegram.WebApp.HapticFeedback.impactOccurred('light');
+            } else if (navigator.vibrate) {
+              navigator.vibrate(50);
+            }
+          } else {
+            // Вибрация при неудаче (другой паттерн)
+            if (window.Telegram?.WebApp?.HapticFeedback) {
+              window.Telegram.WebApp.HapticFeedback.notificationOccurred('error');
+            } else if (navigator.vibrate) {
+              navigator.vibrate([50, 100, 50]); // Двойная вибрация для неудачи
+            }
+          }
+
           setCycleReward(reward);
           setLastCycleTime(Date.now());
-          setTotalMined(prev => prev + reward);
+          setLastMiningAttempt({ success: isSuccessful, reward });
 
           setMiningHistory(prev => [{
             id: Date.now(),
             username: window.Telegram?.WebApp?.initDataUnsafe?.user?.username || 'User',
             power: miningPower,
             reward: reward,
+            success: isSuccessful,
             timestamp: Date.now()
           }, ...prev.slice(0, 9)]);
         }
@@ -364,7 +389,8 @@ export function MiningProvider({ children }) {
     setEnergy,
     buyEquipment,
     upgradeEnergy,
-    startMining
+    startMining,
+    lastMiningAttempt,
   };
 
   return (

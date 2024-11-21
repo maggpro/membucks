@@ -155,14 +155,16 @@ function Mining() {
         <h2>История добычи</h2>
         <div className="history-list">
           {miningHistory.map(record => (
-            <div key={record.id} className="history-item">
+            <div key={record.id} className={`history-item ${!record.success ? 'failed' : ''}`}>
               <div className="history-header">
                 <span className="history-user">{record.username}</span>
                 <span className="history-time">{formatUTCTime(record.timestamp)}</span>
               </div>
               <div className="history-details">
                 <span className="history-power">Мощность: {record.power.toFixed(1)}</span>
-                <span className="history-reward">{record.reward.toFixed(6)} $BUCKS</span>
+                <span className={`history-reward ${!record.success ? 'failed' : ''}`}>
+                  {record.success ? record.reward.toFixed(6) : 'НЕУДАЧА'} $BUCKS
+                </span>
               </div>
             </div>
           ))}
