@@ -89,7 +89,7 @@ function Mining() {
             className="recharge-button"
             onClick={handleRecharge}
           >
-            Заполнить - 300<StarIcon />
+            Увеличить энергию - 300<StarIcon />
           </button>
         </div>
       </div>
