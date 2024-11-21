@@ -18,15 +18,19 @@ function Mining() {
   const [rechargeTimeLeft, setRechargeTimeLeft] = useState(0);
 
   // Добавляем состояния для информации о монете
-  const TOTAL_SUPPLY = 1000000; // Общая эмиссия
+  const TOTAL_SUPPLY = 100_000_000; // 100 миллионов $Bucks
   const [totalMined, setTotalMined] = useState(156842.123456); // Пример добытых монет
   const [minersOnline, setMinersOnline] = useState(127); // Пример онлайн майнеров
 
-  // Добавляем новые состояния для оборудования и майнинга
+  // Добавляе новые состояния для оборудования и майнинга
   const [equipment, setEquipment] = useState(1); // Количество оборудования
   const [cycleReward, setCycleReward] = useState(0); // Награда за текущий цикл
   const [lastCycleTime, setLastCycleTime] = useState(0); // Время последнего цикла
-  const BASE_CYCLE_REWARD = 0.1; // Базовая награда за цикл
+  const TOTAL_PLAYERS = 100_000; // 100 тысяч игроков
+  const MINING_PERIOD = 90 * 24 * 60 * 60; // 90 дней в секундах
+  const CYCLE_TIME = 4; // среднее время цикла (3-5 секунд)
+  const BASE_CYCLE_REWARD = (TOTAL_SUPPLY / TOTAL_PLAYERS / MINING_PERIOD) * CYCLE_TIME; // Базовая награда за цикл
+  const EQUIPMENT_MULTIPLIER = 1.1; // +10% к добыче за каждую единицу
 
   // Добавляем состояние для истории добычи
   const [miningHistory, setMiningHistory] = useState([
@@ -58,8 +62,8 @@ function Mining() {
   // Обработка восстановления энергии
   useEffect(() => {
     let rechargeInterval;
-    if (isRecharging && energy < maxEnergy) {
-      const rechargeTime = 3 * 60 * 60 * 1000; // 3 часа в миллисекундах
+    if (isRecharging && energy < maxEnergy && !isActive) {
+      const rechargeTime = 10 * 60 * 1000; // 10 минут в миллисекундах
       const incrementPerSecond = maxEnergy / (rechargeTime / 1000);
 
       rechargeInterval = setInterval(() => {
@@ -79,60 +83,89 @@ function Mining() {
       }, 1000);
     }
     return () => clearInterval(rechargeInterval);
-  }, [isRecharging, maxEnergy]);
+  }, [isRecharging, maxEnergy, isActive]);
 
-  // Функция для расчета слуайной награды за цикл
+  // Функция для расчета награды за цикл с учетом оборудования
   const calculateCycleReward = () => {
-    const variance = BASE_CYCLE_REWARD * 0.2; // 20% вариация
-    const minReward = BASE_CYCLE_REWARD - variance;
-    const maxReward = BASE_CYCLE_REWARD + variance;
-    return minReward + Math.random() * (maxReward - minReward);
+    // Базовая награда
+    const baseReward = BASE_CYCLE_REWARD;
+
+    // Множитель от количества оборудования
+    const equipmentBonus = Math.pow(EQUIPMENT_MULTIPLIER, equipment - 1);
+
+    // Случайная вариация ±20%
+    const variance = baseReward * 0.2;
+    const minReward = baseReward - variance;
+    const maxReward = baseReward + variance;
+    const randomReward = minReward + Math.random() * (maxReward - minReward);
+
+    // Итоговая награда с учетом бонуса от оборудования
+    return randomReward * equipmentBonus;
   };
 
-  // Функция для покупки оборудования
+  // Функция покупки оборудования (без ограничения)
   const buyEquipment = () => {
     // Здесь будет проверка и списание Telegram Stars
     setEquipment(prev => prev + 1);
-    setMiningPower(prev => prev + 1);
+    setMiningPower(prev => prev * EQUIPMENT_MULTIPLIER);
+  };
+
+  // Функция форматирования времени в UTC
+  const formatUTCTime = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString('en-US', {
+      hour12: false,
+      timeZone: 'UTC',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
   };
 
   // Обновляем эффект майнинга
   useEffect(() => {
     let miningInterval;
-    if (isActive && energy > 0) {
+    if (isActive) {
       miningInterval = setInterval(() => {
-        // Генерируем случайное время цикла (3-5 секунд)
-        const cycleTime = 3000 + Math.random() * 2000;
+        // Проверяем энергию
+        if (energy > 0) {
+          // Уменьшаем энергию
+          setEnergy(prev => {
+            const newEnergy = prev - 1;
+            if (newEnergy <= 0) {
+              // Останавливаем майнинг при нулевой энергии
+              setIsActive(false);
+              // Начинаем восстановление
+              setIsRecharging(true);
+              // Устанавливаем время восстановления (10 минут)
+              setRechargeTimeLeft(10 * 60 * 1000);
+              return 0;
+            }
+            return newEnergy;
+          });
 
-        if (Date.now() - lastCycleTime >= cycleTime) {
-          const reward = calculateCycleReward() * miningPower;
-          setBalance(prev => prev + reward);
-          setCycleReward(reward);
-          setLastCycleTime(Date.now());
+          // Проверяем время цикла и добываем монеты только если есть энергия
+          const cycleTime = 3000 + Math.random() * 2000;
+          if (Date.now() - lastCycleTime >= cycleTime) {
+            const reward = calculateCycleReward() * miningPower;
+            setBalance(prev => prev + reward);
+            setCycleReward(reward);
+            setLastCycleTime(Date.now());
 
-          // Добавляем запись в историю
-          setMiningHistory(prev => [{
-            id: Date.now(), // Используем timestamp как id
-            username: window.Telegram?.WebApp?.initDataUnsafe?.user?.username || 'User',
-            power: miningPower,
-            reward: reward
-          }, ...prev.slice(0, 9)]); // Сохраняем только последние 10 записей
-        }
-
-        setEnergy(prev => {
-          const newEnergy = prev - 1;
-          if (newEnergy <= 0) {
-            setIsActive(false);
-            setIsRecharging(true);
-            setRechargeTimeLeft(3 * 60 * 60 * 1000);
-            return 0;
+            // Добавляем запись в историю с временем
+            setMiningHistory(prev => [{
+              id: Date.now(),
+              username: window.Telegram?.WebApp?.initDataUnsafe?.user?.username || 'User',
+              power: miningPower,
+              reward: reward,
+              timestamp: Date.now() // Добавляем временную метку
+            }, ...prev.slice(0, 9)]);
           }
-          return newEnergy;
-        });
+        }
       }, 1000);
     }
     return () => clearInterval(miningInterval);
-  }, [isActive, energy, miningPower, lastCycleTime]);
+  }, [isActive, miningPower, lastCycleTime]);
 
   const handleRecharge = () => {
     // Здесь будет логика проверки и списания Telegram Stars
@@ -225,7 +258,7 @@ function Mining() {
         <button
           className={`mining-control-button ${isActive ? 'active' : ''}`}
           onClick={() => setIsActive(!isActive)}
-          disabled={energy <= 0}
+          disabled={energy <= 0 && !isActive}
         >
           {isActive ? 'Остановить майнинг' : 'Запустить майнинг'}
         </button>
@@ -237,7 +270,10 @@ function Mining() {
         <div className="history-list">
           {miningHistory.map(record => (
             <div key={record.id} className="history-item">
-              <div className="history-user">{record.username}</div>
+              <div className="history-header">
+                <span className="history-user">{record.username}</span>
+                <span className="history-time">{formatUTCTime(record.timestamp)}</span>
+              </div>
               <div className="history-details">
                 <span className="history-power">Мощность: {record.power.toFixed(1)}</span>
                 <span className="history-reward">{record.reward.toFixed(6)} $Bucks</span>

@@ -323,3 +323,15 @@
 .mining-history-block h2 {
   margin-bottom: 8px;
 }
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-time {
+  font-size: 9px;
+  opacity: 0.6;
+  color: var(--text-color);
+}
