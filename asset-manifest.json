@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/membucks/static/css/main.a3b7291a.css",
+    "main.js": "/membucks/static/js/main.f3b21081.js",
+    "index.html": "/membucks/index.html",
+    "main.a3b7291a.css.map": "/membucks/static/css/main.a3b7291a.css.map",
+    "main.f3b21081.js.map": "/membucks/static/js/main.f3b21081.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a3b7291a.css",
+    "static/js/main.f3b21081.js"
+  ]
+}
