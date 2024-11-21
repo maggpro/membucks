@@ -14,8 +14,6 @@ function Mining() {
   const [isActive, setIsActive] = useState(false);
   const [energy, setEnergy] = useState(100);
   const [maxEnergy, setMaxEnergy] = useState(100);
-  const [isRecharging, setIsRecharging] = useState(false);
-  const [rechargeTimeLeft, setRechargeTimeLeft] = useState(0);
 
   // Добавляем состояния для информации о монете
   const TOTAL_SUPPLY = 100_000_000; // 100 миллионов $Bucks
@@ -65,9 +63,8 @@ function Mining() {
   // Обработка восстановления энергии
   useEffect(() => {
     let rechargeInterval;
-    // Восстанавливаем энергию только когда майнинг остановлен и энергия не полная
     if (!isActive && energy < maxEnergy) {
-      const rechargeTime = 10 * 60 * 1000; // 10 минут для полного восстановления
+      const rechargeTime = 10 * 60 * 1000;
       const incrementPerSecond = maxEnergy / (rechargeTime / 1000);
 
       rechargeInterval = setInterval(() => {
@@ -82,7 +79,7 @@ function Mining() {
     }
 
     return () => clearInterval(rechargeInterval);
-  }, [isActive, energy, maxEnergy]); // Зависимости для useEffect
+  }, [isActive, energy, maxEnergy]);
 
   // Функция для расчета награды за цикл
   const calculateCycleReward = () => {
@@ -177,13 +174,6 @@ function Mining() {
       setEnergy(newMaxEnergy);
       return newMaxEnergy;
     });
-  };
-
-  const formatTime = (ms) => {
-    const hours = Math.floor(ms / (60 * 60 * 1000));
-    const minutes = Math.floor((ms % (60 * 60 * 1000)) / (60 * 1000));
-    const seconds = Math.floor((ms % (60 * 1000)) / 1000);
-    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
   // Функция форматирования времени в UTC
