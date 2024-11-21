@@ -6,8 +6,11 @@ function Navigation() {
   return (
     <nav className="navigation">
       <div className="nav-links">
-        <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+        <NavLink to="/mining" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
           Майнинг
+        </NavLink>
+        <NavLink to="/rating" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+          Рейтинг
         </NavLink>
         <NavLink to="/tasks" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
           Задания
