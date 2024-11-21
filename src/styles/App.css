@@ -38,21 +38,26 @@ html, body {
 
 .main-content {
   flex: 1;
-  padding: 4px 6px;
-  padding-top: calc(var(--tg-header-height) + 4px);
+  margin-top: 0;
+  padding: 4px 12px;
+  padding-top: calc(var(--tg-header-height) + 12px);
   padding-bottom: 60px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
   width: 100%;
-  height: calc(var(--tg-viewport-stable-height) - var(--tg-header-height));
+  height: calc(var(--tg-viewport-stable-height));
+  background-color: var(--block-bg);
+  position: relative;
+  z-index: 1;
 }
 
 @supports (padding-top: env(safe-area-inset-top)) {
   .main-content {
-    padding-top: calc(env(safe-area-inset-top) + var(--tg-header-height) + 4px);
-    padding-left: calc(env(safe-area-inset-left) + 6px);
-    padding-right: calc(env(safe-area-inset-right) + 6px);
+    margin-top: 0;
+    padding-top: calc(env(safe-area-inset-top) + var(--tg-header-height) + 12px);
+    padding-left: calc(env(safe-area-inset-left) + 12px);
+    padding-right: calc(env(safe-area-inset-right) + 12px);
     padding-bottom: calc(env(safe-area-inset-bottom) + 60px);
   }
 }
@@ -139,7 +144,7 @@ h2 {
 
 @media (min-width: 768px) {
   .main-content {
-    max-width: 320px;
+    max-width: 360px;
     margin: 0 auto;
   }
 }

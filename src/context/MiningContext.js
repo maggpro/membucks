@@ -68,11 +68,11 @@ export function MiningProvider({ children }) {
               navigator.vibrate(50);
             }
           } else {
-            // Вибрация при неудаче (другой паттерн)
+            // Вибрация при неудаче
             if (window.Telegram?.WebApp?.HapticFeedback) {
               window.Telegram.WebApp.HapticFeedback.notificationOccurred('error');
             } else if (navigator.vibrate) {
-              navigator.vibrate([50, 100, 50]); // Двойная вибрация для неудачи
+              navigator.vibrate([50, 100, 50]);
             }
           }
 
@@ -80,14 +80,25 @@ export function MiningProvider({ children }) {
           setLastCycleTime(Date.now());
           setLastMiningAttempt({ success: isSuccessful, reward });
 
-          setMiningHistory(prev => [{
-            id: Date.now(),
-            username: window.Telegram?.WebApp?.initDataUnsafe?.user?.username || 'User',
-            power: miningPower,
-            reward: reward,
-            success: isSuccessful,
-            timestamp: Date.now()
-          }, ...prev.slice(0, 9)]);
+          // Добавляем свою попытку в общую историю
+          const currentUser = window.Telegram?.WebApp?.initDataUnsafe?.user?.username || 'User';
+
+          // Генерируем случайные попытки других майнеров
+          const otherMiners = generateRandomMiners(2); // 2 случайных майнера на каждую свою попытку
+
+          setMiningHistory(prev => [
+            {
+              id: Date.now(),
+              username: currentUser,
+              power: miningPower,
+              reward: reward,
+              success: isSuccessful,
+              timestamp: Date.now(),
+              isCurrentUser: true
+            },
+            ...otherMiners,
+            ...prev.slice(0, 7) // Оставляем последние 10 записей с учетом новых
+          ]);
         }
 
         setEnergy(prev => {
@@ -103,6 +114,34 @@ export function MiningProvider({ children }) {
 
     return () => clearInterval(miningInterval);
   }, [isActive, energy, miningPower, lastCycleTime]);
+
+  // Функция для генерации случайных майнеров
+  const generateRandomMiners = (count) => {
+    const names = [
+      "Crypto", "Moon", "Block", "Hash", "Coin", "Mining", "Star", "Power",
+      "Bucks", "Mega", "Ultra", "Super", "Pro", "Master", "King", "Lord"
+    ];
+    const suffixes = ["Miner", "Hunter", "Master", "Pro", "King", "Ninja"];
+
+    return Array(count).fill(null).map(() => {
+      const name1 = names[Math.floor(Math.random() * names.length)];
+      const name2 = suffixes[Math.floor(Math.random() * suffixes.length)];
+      const username = `${name1}${name2}${Math.floor(Math.random() * 999)}`;
+      const power = 100 + Math.random() * 900;
+      const isSuccessful = Math.random() > 0.1;
+      const reward = isSuccessful ? calculateCycleReward() * power : 0;
+
+      return {
+        id: Date.now() + Math.random(),
+        username,
+        power,
+        reward,
+        success: isSuccessful,
+        timestamp: Date.now() - Math.random() * 2000,
+        isCurrentUser: false
+      };
+    });
+  };
 
   // Эффект для восстановления энергии
   useEffect(() => {

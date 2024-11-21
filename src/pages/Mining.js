@@ -155,7 +155,7 @@ function Mining() {
         <h2>История добычи</h2>
         <div className="history-list">
           {miningHistory.map(record => (
-            <div key={record.id} className={`history-item ${!record.success ? 'failed' : ''}`}>
+            <div key={record.id} className={`history-item ${!record.success ? 'failed' : ''} ${record.isCurrentUser ? 'current-user' : ''}`}>
               <div className="history-header">
                 <span className="history-user">{record.username}</span>
                 <span className="history-time">{formatUTCTime(record.timestamp)}</span>
