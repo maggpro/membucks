@@ -1,12 +1,23 @@
 .navigation {
   position: fixed;
-  bottom: 0;
+  bottom: 30px;
   left: 0;
   right: 0;
   background-color: var(--block-bg);
   padding: 8px 4px;
   border-top: 1px solid rgba(0, 255, 157, 0.2);
   z-index: 1000;
+}
+
+.navigation::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background-color: var(--block-bg);
+  z-index: -1;
 }
 
 .nav-links {

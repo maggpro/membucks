@@ -134,37 +134,45 @@ export function MiningProvider({ children }) {
     const lastActive = parseInt(localStorage.getItem('lastActivityTime') || '0');
     const currentTime = Date.now();
 
-    // Если прошло больше 5 секунд с последней активности, считаем предыдущую сессию закрытой
-    if (currentTime - lastActive > 5000) {
+    // Увеличиваем интервал проверки до 10 секунд
+    if (currentTime - lastActive > 10000) {
       localStorage.setItem('activeTabId', tabId);
       localStorage.setItem('lastActivityTime', currentTime.toString());
-    } else if (activeTabId && activeTabId !== tabId) {
-      // Если уже есть активная вкладка, останавливаем майнинг
+    } else if (activeTabId && activeTabId !== tabId && isActive) {
+      // Проверяем только если майнинг активен
       setIsActive(false);
-      alert('Майнинг уже запущен в другой вкладке');
+      if (window.Telegram?.WebApp) {
+        window.Telegram.WebApp.showAlert('Майнинг уже запущен в другой вкладке');
+      }
     }
 
-    // Проверяем активность каждую секунду
+    // Проверяем активность каждые 5 секунд вместо 1
     const checkInterval = setInterval(() => {
-      const currentTabId = localStorage.getItem('activeTabId');
-      if (currentTabId === tabId) {
-        localStorage.setItem('lastActivityTime', Date.now().toString());
+      if (isActive) { // Проверяем только при активном майнинге
+        const currentTabId = localStorage.getItem('activeTabId');
+        if (currentTabId === tabId) {
+          localStorage.setItem('lastActivityTime', Date.now().toString());
+        }
       }
-    }, 1000);
+    }, 5000);
 
     // Обработчик видимости страницы
     const handleVisibilityChange = () => {
-      if (document.hidden) {
+      if (document.hidden && isActive) {
         setIsActive(false);
       }
     };
 
     // Обработчик фокуса окна
     const handleFocus = () => {
-      const currentTabId = localStorage.getItem('activeTabId');
-      if (currentTabId && currentTabId !== tabId) {
-        setIsActive(false);
-        alert('Майнинг уже запущен в другой вкладке');
+      if (isActive) { // Проверяем только при активном майнинге
+        const currentTabId = localStorage.getItem('activeTabId');
+        if (currentTabId && currentTabId !== tabId) {
+          setIsActive(false);
+          if (window.Telegram?.WebApp) {
+            window.Telegram.WebApp.showAlert('Майнинг уже запущен в другой вкладке');
+          }
+        }
       }
     };
 
@@ -201,7 +209,7 @@ export function MiningProvider({ children }) {
         localStorage.removeItem('activeTabId');
       }
     };
-  }, [tabId]);
+  }, [tabId, isActive]);
 
   // Защита от быстрого переключения вкладок
   useEffect(() => {

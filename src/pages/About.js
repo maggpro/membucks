@@ -38,7 +38,7 @@ function About() {
           </section>
 
           <section className="about-section">
-            <h3>Механика игры</h3>
+            <h3>Механика майнинга</h3>
             <div className="feature-list">
               <div className="feature-item">
                 <span className="feature-dot">•</span>
@@ -79,11 +79,11 @@ function About() {
               <h4>Бонусы мощности</h4>
               <div className="bonus-item">
                 <span className="bonus-value">+5 MH/s</span>
-                <span className="bonus-desc">каждые 10 единиц</span>
+                <span class="bonus-desc">каждые 10 единиц</span>
               </div>
               <div className="bonus-item">
                 <span className="bonus-value">+20 MH/s</span>
-                <span className="bonus-desc">каждые 50 единиц</span>
+                <span class="bonus-desc">каждые 50 единиц</span>
               </div>
             </div>
             <div className="info-note">
@@ -131,23 +131,37 @@ function About() {
           </section>
 
           <section className="about-section">
-            <h3>Советы</h3>
+            <h3>Реферальная система</h3>
             <div className="feature-list">
               <div className="feature-item">
                 <span className="feature-dot">•</span>
-                <span>Покупайте оборудование для увеличения мощности</span>
+                <span>+20 к максимальной энергии за каждого активного майнера</span>
               </div>
               <div className="feature-item">
                 <span className="feature-dot">•</span>
-                <span>Следите за бонусами при достижении порогов</span>
+                <span>Активным считается майнер, купивший оборудование</span>
               </div>
               <div className="feature-item">
                 <span className="feature-dot">•</span>
-                <span>Увеличивайте запас энергии для длительного майнинга</span>
+                <span>Бонус начисляется автоматически</span>
+              </div>
+            </div>
+          </section>
+
+          <section className="about-section">
+            <h3>Защита от мультиаккаунтов</h3>
+            <div className="feature-list">
+              <div className="feature-item">
+                <span className="feature-dot">•</span>
+                <span>Майнинг возможен только в одной вкладке</span>
               </div>
               <div className="feature-item">
                 <span className="feature-dot">•</span>
-                <span>Останавливайте майнинг для восстановления энергии</span>
+                <span>Проверка устройства и браузера</span>
+              </div>
+              <div className="feature-item">
+                <span className="feature-dot">•</span>
+                <span>Защита от автоматизации майнинга</span>
               </div>
             </div>
           </section>
