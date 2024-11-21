@@ -12,12 +12,63 @@ body {
   font-family: 'Press Start 2P', cursive;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: unset;
+  color: var(--text-color);
 }
 
+* {
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* Применяем пиксельный шрифт ко всем текстовым элементам */
+p, span, div, button, input, a {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.5px;
+}
+
+/* Заголовки */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Press Start 2P', cursive;
   letter-spacing: 1px;
   line-height: 1.5;
+  color: var(--accent-color);
+}
+
+/* Кнопки */
+button {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.5px;
+}
+
+/* Все числовые значения */
+.value,
+.balance-value,
+.energy-value,
+.total-supply,
+.miners-count,
+.detail-value,
+.mined-amount,
+.history-time,
+.history-reward,
+.emission-details span,
+.miners-online span,
+.info-row span,
+.equipment-control span {
+  font-family: 'Press Start 2P', cursive !important;
+  letter-spacing: 0;
+}
+
+/* Навигация */
+.nav-link {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.5px;
+}
+
+/* Специальные элементы */
+.dollar-icon,
+.rank,
+.username {
+  font-family: 'Press Start 2P', cursive;
 }
 
 code {
