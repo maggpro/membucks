@@ -1,8 +1,8 @@
 .mining-page {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 8px;
+  gap: 4px;
+  box-sizing: border-box;
 }
 
 .profile-block,
@@ -10,9 +10,10 @@
 .mining-info-block,
 .mining-history-block {
   background-color: var(--secondary-bg);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 8px;
-  width: calc(100% - 20px);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .balance-container {
@@ -175,12 +176,10 @@
 
 .mining-history-block {
   background-color: var(--secondary-bg);
-  border-radius: 12px;
-  padding: 12px;
-  width: calc(100% - 20px);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .mining-history-block h2 {
@@ -193,20 +192,20 @@
 .history-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .history-item {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  padding: 4px;
+  gap: 2px;
+  padding: 6px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 4px;
 }
 
 .history-user {
-  font-size: 8px;
+  font-size: 10px;
   color: var(--accent-color);
 }
 
@@ -214,7 +213,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 7px;
+  font-size: 9px;
   opacity: 0.8;
 }
 
@@ -353,7 +352,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .history-user {
@@ -365,7 +364,7 @@
   font-size: 9px;
   opacity: 0.6;
   color: var(--text-color);
-  font-family: monospace; /* Для лучшей читаемости времени */
+  font-family: monospace;
 }
 
 .history-details {

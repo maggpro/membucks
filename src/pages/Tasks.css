@@ -1,0 +1,16 @@
+.tasks-page {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+}
+
+.tasks-block {
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ... остальные стили ... */

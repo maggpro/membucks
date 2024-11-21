@@ -1,0 +1,25 @@
+.rating-page {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+}
+
+.rating-block {
+  background-color: var(--secondary-bg);
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rating-block h2 {
+  font-size: 12px;
+  margin: 0 0 12px 0;
+  color: var(--accent-color);
+}
+
+.rating-content {
+  font-size: 10px;
+  opacity: 0.8;
+}

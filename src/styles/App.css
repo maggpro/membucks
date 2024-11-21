@@ -32,8 +32,16 @@ html, body {
 
 .main-content {
   flex: 1;
-  padding: 20px;
-  padding-bottom: 70px;
+  padding: 4px;
+  padding-bottom: 60px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    max-width: 320px;
+    margin: 0 auto;
+  }
 }
